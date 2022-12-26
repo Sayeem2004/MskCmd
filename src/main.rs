@@ -14,25 +14,24 @@ const GAP: usize = 5;
 /**
  * List of recognized programming language extensions
  */
-const LANGS: [&str; 25] = [
+const LANGS: [&str; 26] = [
     "c", "coffee", "cpp", "cs", "css", "fxml", "gradle", "h", "hpp", "html", "ipynb", "java", "js",
-    "json", "md", "nlogo", "php", "py", "rkt", "rs", "sh", "tex", "toml", "xml", "yml",
+    "json", "md", "nlogo", "php", "py", "rkt", "rs", "sh", "sql", "tex", "toml", "xml", "yml",
 ];
 
 /**
  * This program takes a directory as an argument and prints the number of lines in each file type.
  */
-pub fn main() -> () {
+pub fn main() {
     // Variable declarations
     let args: Vec<String> = env::args().collect();
-    let path: &Path;
 
     // Setting path to appropriate value
-    if args.len() == 1 {
-        path = Path::new(".");
+    let path: &Path = if args.len() == 1 {
+        Path::new(".")
     } else {
-        path = Path::new(&args[1]);
-    }
+        Path::new(&args[1])
+    };
 
     // Changing directory if possible
     let path_string: String = path.to_str().unwrap_or(".").to_string();
@@ -50,7 +49,7 @@ pub fn main() -> () {
 /**
  * This function prints the number of lines in each file type.
  */
-pub fn print_lines() -> () {
+pub fn print_lines() {
     // Variable declarations
     let mut dict: HashMap<String, usize> = HashMap::new();
     let start: Instant = Instant::now();
@@ -63,11 +62,11 @@ pub fn print_lines() -> () {
         // Checking to see if it is a file
         if entry.file_type().is_file() {
             // Reading file and getting extension and lines
-            let file: String = fs::read_to_string(entry.path()).unwrap_or(String::from(""));
+            let file: String = fs::read_to_string(entry.path()).unwrap_or_else(|_| String::from(""));
             let extension: String = entry
                 .path()
                 .extension()
-                .unwrap_or(" ".as_ref())
+                .unwrap_or_else(|| " ".as_ref())
                 .to_str()
                 .unwrap_or(" ")
                 .to_string();
@@ -75,7 +74,7 @@ pub fn print_lines() -> () {
 
             // Adding to dictionary
             if dict.contains_key(&extension) {
-                let current: usize = dict.get(&extension).unwrap().clone();
+                let current: usize = *dict.get(&extension).unwrap();
                 dict.insert(extension, current + lines);
             } else {
                 dict.insert(extension, lines);
@@ -97,12 +96,12 @@ pub fn print_lines() -> () {
     let mut mx_line_total: usize = 0;
     let mut mx_line_prog: usize = 0;
     for (key, value) in dict.iter() {
-        mx_key_total = mx_key_total.max(key.len()).min(SIZE);
-        mx_line_total = mx_line_total.max(value.to_string().len()).min(SIZE);
+        mx_key_total = mx_key_total.clamp(key.len(), SIZE);
+        mx_line_total = mx_line_total.clamp(value.to_string().len(), SIZE);
 
         if is_lang(key) {
-            mx_key_prog = mx_key_prog.max(key.len()).min(SIZE);
-            mx_line_prog = mx_line_prog.max(value.to_string().len()).min(SIZE);
+            mx_key_prog = mx_key_prog.clamp(key.len(), SIZE);
+            mx_line_prog = mx_line_prog.clamp(value.to_string().len(), SIZE);
         }
 
         // Printing time elapsed
@@ -211,11 +210,11 @@ pub fn print_lines() -> () {
 pub fn is_lang(extension: &String) -> bool {
     // Checking if extension is in list
     for lang in LANGS {
-        if (*extension) == String::from(lang) {
+        if extension == &String::from(lang) {
             return true;
         }
     }
 
     // Default return value
-    return false;
+    false
 }
