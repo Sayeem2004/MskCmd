@@ -1,20 +1,21 @@
-BIN := $(shell pwd)/target/release/mskcmd
-INSTALL := script/install.sh
-REMOVE := script/remove.sh
-SCRIPT_FILES := $(wildcard script/*.sh)
+REPO_PATH := $(shell pwd)
+INSTALL := utilities/install.sh
+REMOVE := utilities/remove.sh
+FUNCTION_FILES := $(wildcard functions/*.sh)
 ZSHRC := ~/.zshrc
 
 all: update clean build install
-	@source $(ZSHRC)
 
 update: $(SCRIPT_FILES)
 	@echo "Updating Permissions...\n"
-	chmod +x $(SCRIPT_FILES)
+	chmod +x $(INSTALL)
+	chmod +x $(REMOVE)
+	chmod +x $(FUNCTION_FILES)
 	@echo ""
 
 clean:
 	@echo "Cleaning...\n"
-	cargo clean && ./$(REMOVE)
+	cargo clean
 	@echo ""
 
 build:
@@ -24,5 +25,10 @@ build:
 
 install:
 	@echo "Installing...\n"
-	./$(INSTALL) $(BIN)
+	@./$(INSTALL) $(REPO_PATH)
+	@echo ""
+
+remove:
+	@echo "Removing...\n"
+	@./$(REMOVE)
 	@echo ""
