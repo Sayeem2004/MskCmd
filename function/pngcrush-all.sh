@@ -1,15 +1,17 @@
-# Installing requirements
-
 # File content
 read -r -d '' COMMENT << EOM
-# Counts the number of lines in the given directory and sorts them by extension type.
+# Compresses and overwrites all png images in a folder.
 EOM
 
 read -r -d '' COMMAND << EOM
-echo ""
+for png in *.png(.N); do
+	printf "\\\\n"
+	pngcrush -ow "\$png"
+done;
+printf "\\\\n"
 EOM
 
 # Adding content to function file
-PATH_TO_FILE=~/.msk_cmd/tally
+PATH_TO_FILE=~/.msk_cmd/pngcrush-all
 echo "$COMMENT" > $PATH_TO_FILE
 echo "$COMMAND" >> $PATH_TO_FILE

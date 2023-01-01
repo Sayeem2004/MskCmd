@@ -1,16 +1,13 @@
-# Installing requirements
-brew install jpegoptim &> /dev/null
-
 # File content
 read -r -d '' COMMENT << EOM
-# Compresses and overwrites all jpg images in a folder.
+# Prints the lines in a file that contain integers that satisfy the given expression.
 EOM
 
 read -r -d '' COMMAND << EOM
-jpegoptim *.jpg
+echo ""
 EOM
 
 # Adding content to function file
-PATH_TO_FILE=~/.msk_cmd/jpgcrush-all
+PATH_TO_FILE=~/.msk_cmd/intsrc
 echo "$COMMENT" > $PATH_TO_FILE
 echo "$COMMAND" >> $PATH_TO_FILE
