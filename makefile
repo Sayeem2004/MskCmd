@@ -1,34 +1,26 @@
-REPO_PATH := $(shell pwd)
-INSTALL := utilities/install.sh
-REMOVE := utilities/remove.sh
-FUNCTION_FILES := $(wildcard functions/*.sh)
-ZSHRC := ~/.zshrc
+repo_path := $(shell pwd)
+function_path := $(repo_path)/functions
+script_path := $(repo_path)/scripts
+zshrc_path := ~/.zshrc
 
-all: update clean build install
-
-update: $(SCRIPT_FILES)
-	@echo "Updating Permissions...\n"
-	chmod +x $(INSTALL)
-	chmod +x $(REMOVE)
-	chmod +x $(FUNCTION_FILES)
-	@echo ""
-
-clean:
-	@echo "Cleaning...\n"
-	cargo clean
-	@echo ""
+update:
+	@echo "Updating Permissions..."
+	echo $(function_path)
 
 build:
-	@echo "Building...\n"
-	cargo build --release
-	@echo ""
+	@echo "Building..."
+	@cargo build --release
 
-install:
-	@echo "Installing...\n"
-	@./$(INSTALL) $(REPO_PATH)
-	@echo ""
+install: update build
+	@echo "Installing..."
+	@./$(install) $(repo_path)
+	@source $(zshrc)
 
-remove:
-	@echo "Removing...\n"
-	@./$(REMOVE)
-	@echo ""
+clean:
+	@echo "Cleaning..."
+	@cargo clean
+
+remove: clean
+	@echo "Removing..."
+	@./$(remove)
+	@source $(zshrc)

@@ -1,6 +1,3 @@
-# Printing arguments
-echo $0
-
 # Installing requirements
 brew install jpegoptim &> /dev/null
 

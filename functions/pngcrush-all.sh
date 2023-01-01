@@ -1,8 +1,5 @@
-# Printing arguments
-echo $0
-
 # Installing requirements
-brew install pngcrush &> /dev/null
+brew list pngcrush &> /dev/null || brew install pngcrush &> /dev/null
 
 # File content
 read -r -d '' COMMENT << EOM

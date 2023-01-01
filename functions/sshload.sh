@@ -1,6 +1,3 @@
-# Printing arguments
-echo $0
-
 # File content
 read -r -d '' COMMENT << EOM
 # Loads in ssh identities from apple keychain.
