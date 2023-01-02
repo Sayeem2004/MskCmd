@@ -41,27 +41,29 @@ python:                     Python programming language
 |-- sqlite:                 (Dependency)
 |-- xz:                     (Dependency)
 
+tealdeer:                   TLDR pages for terminal commands
+
 tree:                       Display directories as trees
 ```
 
-## Code
+## Coding
 
-## ZSH
+## Functions
 
 Creates the `$ZDOTDIR/.zsh_functions` directory, adds it to the `fpath` variable, and then adds the following functions to the directory.
 
 These functions are loaded automatically when the shell is started through the `$ZDOTDIR/.zshrc` file.
 
 ```txt
-`tally`: Counts the number of lines in the given directory and sorts them by extension type.
+`tally [path]`: Counts the number of lines in the given directory and sorts them by extension type.
 
 `sshload`: Loads in SSH identities from apple keychain.
 
-`pngcrush-all`: Compresses and overwrites all PNG images in a folder.
+`pngcrush-all`: Compresses and overwrites all PNG images in the current directory.
 
-`jpgcrush-all`: Compresses and overwrites all JPG images in a folder.
+`jpgcrush-all`: Compresses and overwrites all JPG images in the current directory.
 
-`intsrc [expression] [file]`: Prints the lines in a file that contain integers that satisfy the given expression.
+`intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression.
 ```
 
 # Removal
@@ -101,12 +103,14 @@ python:                     Python programming language
 |-- sqlite:                 (Dependency)
 |-- xz:                     (Dependency)
 
+tealdeer:                   TLDR pages for terminal commands
+
 tree:                       Display directories as trees
 ```
 
-## Code
+## Coding
 
-## ZSH
+## Functions
 
 To remove all functions go to the `$ZDOTDIR/.zshrc` file and remove the following lines. Then delete the `$ZDOTDIR/.zsh_functions` directory.
 
@@ -119,15 +123,15 @@ autoload -U $fpath[1]/*(.:t)
 To remove a specific function, go to the `$ZDOTDIR/.zsh_functions` directory and remove the corresponding file. The list of functions is provided below.
 
 ```txt
-`tally`: Counts the number of lines in the given directory and sorts them by extension type.
+`tally [path]`: Counts the number of lines in the given directory and sorts them by extension type.
 
 `sshload`: Loads in SSH identities from apple keychain.
 
-`pngcrush-all`: Compresses and overwrites all PNG images in a folder.
+`pngcrush-all`: Compresses and overwrites all PNG images in the current directory.
 
-`jpgcrush-all`: Compresses and overwrites all JPG images in a folder.
+`jpgcrush-all`: Compresses and overwrites all JPG images in the current directory.
 
-`intsrc [expression] [file]`: Prints the lines in a file that contain integers that satisfy the given expression.
+`intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression.
 ```
 
 # Usage
@@ -136,6 +140,20 @@ After installation, the final step is to close the terminal and open a new one. 
 
 ## Brew
 
-## Code
+`tldr [command]`: Displays the TLDR pages for terminal commands. TLDR pages are short yet informative descriptions of terminal commands that are easier to read than MAN pages. Use `tldr -l` to list all available commands. ![TLDR Example](assets/brew/TLDR.png)
 
-## ZSH
+`tree`: Displays directories as trees which is useful for visualizing the directory structure. Use `tldr tree` for more information about flag combinations. ![Tree Example](assets/brew/Tree.png)
+
+## Coding
+
+## Functions
+
+`tally [path]`: Counts the number of lines in the given directory and sorts them by extension type. If no path is given, the current directory is used. ![Tally Example](assets/functions/Tally.png)
+
+`sshload`: Loads in SSH identities from apple keychain. For this to cause an effect, the SSH identities must be added to the keychain beforehand. ![SSH Load Example](assets/functions/SSHLoad.png)
+
+`pngcrush-all`: Compresses and overwrites all PNG images in the current directory. The resulting images are similar in quality to the original images but are much smaller in size. ![PNG Crush All Example](assets/functions/PNGCrush-All.png)
+
+`jpgcrush-all`: Compresses and overwrites all JPG images in the current directory. The resulting images are similar in quality to the original images but are much smaller in size. ![JPG Crush All Example](assets/functions/JPGCrush-All.png)
+
+`intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression. This is useful for finding lines in a file that contain integers that are within a certain range. For example, `intsrc ">= 0" "<= 100" --file file.txt` will print all lines in `file.txt` that contain integers between 0 and 100 inclusive.

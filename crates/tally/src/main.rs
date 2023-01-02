@@ -54,7 +54,6 @@ pub fn print_lines() {
     let mut dict: HashMap<String, usize> = HashMap::new();
     let start: Instant = Instant::now();
     let mut prev: u64 = 0;
-    println!("\x1B[2J\x1B[1;1H");
     println!("Time elapsed: {} seconds", prev);
 
     // Iterating through all files and directories
@@ -84,7 +83,6 @@ pub fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("\x1B[2J\x1B[1;1H");
             println!("Time elapsed: {} seconds", curr);
             prev = curr;
         }
@@ -107,7 +105,6 @@ pub fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("\x1B[2J\x1B[1;1H");
             println!("Time elapsed: {} seconds", curr);
             prev = curr;
         }
@@ -149,7 +146,6 @@ pub fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("\x1B[2J\x1B[1;1H");
             println!("Time elapsed: {} seconds", curr);
             prev = curr;
         }
@@ -158,11 +154,10 @@ pub fn print_lines() {
     prog.sort();
 
     // Getting terminal size
-    let (width, height) = termion::terminal_size().unwrap();
+    let (width, _height) = termion::terminal_size().unwrap();
     let skip_total: usize = (width as usize) / (mx_key_total + mx_line_total + 5 + GAP);
     let skip_prog: usize = (width as usize) / (mx_key_prog + mx_line_prog + 5 + GAP);
     let mut i: usize = 0;
-    let mut q: usize = 6;
 
     // Printing total lines
     println!("\nAll Extensions:");
@@ -171,12 +166,10 @@ pub fn print_lines() {
 
         i += 1;
         if i % skip_total == 0 {
-            q += 1;
             println!();
         }
     }
     if i % skip_total != 0 {
-        q += 1;
         println!();
     }
 
@@ -188,19 +181,11 @@ pub fn print_lines() {
 
         i += 1;
         if i % skip_prog == 0 {
-            q += 1;
             println!();
         }
     }
     if i % skip_prog != 0 {
-        q += 1;
         println!();
-    }
-
-    // Printing empty lines
-    while q < height as usize {
-        println!();
-        q += 1;
     }
 }
 

@@ -91,6 +91,11 @@ echo "    Installing python..."
 brew list python &> /dev/null || brew install python &> /dev/null
 brew list python &> /dev/null || echo "    Failed to install python."
 
+# Installing tealdeer
+echo "    Installing tealdeer..."
+brew list tealdeer &> /dev/null || brew install tealdeer &> /dev/null
+brew list tealdeer &> /dev/null || echo "    Failed to install tealdeer."
+
 # Installing tree
 echo "    Installing tree..."
 brew list tree &> /dev/null || brew install tree &> /dev/null

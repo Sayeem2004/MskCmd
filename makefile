@@ -1,3 +1,9 @@
+# TODO: Add usage examples/images
+# TODO: Finish intsrc implementation
+# TODO: Finish configure_code implementation
+# TODO: Finish configure_zsh implementation
+# TODO: Find more packages to install in configure_brew
+
 NULL :=
 TAB  := $(NULL)    $(NULL)
 
