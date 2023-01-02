@@ -1,10 +1,12 @@
+# Author: Sayeem2004
+
 # File content
 read -r -d '' comments << EOM
 # Prints the lines in a file that contain integers that satisfy the given expression.
 EOM
 
 read -r -d '' commands << EOM
-cargo run --release --manifest-path $1/Cargo.toml --bin intsrc
+cargo run --release --quiet --manifest-path $1/Cargo.toml --bin intsrc -- "\$@"
 EOM
 
 # Adding content to function file

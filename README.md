@@ -152,8 +152,8 @@ After installation, the final step is to close the terminal and open a new one. 
 
 `sshload`: Loads in SSH identities from apple keychain. For this to cause an effect, the SSH identities must be added to the keychain beforehand. ![SSH Load Example](assets/functions/SSHLoad.png)
 
-`pngcrush-all`: Compresses and overwrites all PNG images in the current directory. The resulting images are similar in quality to the original images but are much smaller in size. ![PNG Crush All Example](assets/functions/PNGCrush-All.png)
+`pngcrush-all`: Compresses and overwrites all PNG images in the current directory. The resulting images are similar in quality to the original images but are smaller in size. ![PNG Crush All Example](assets/functions/PNGCrush-All.png)
 
-`jpgcrush-all`: Compresses and overwrites all JPG images in the current directory. The resulting images are similar in quality to the original images but are much smaller in size. ![JPG Crush All Example](assets/functions/JPGCrush-All.png)
+`jpgcrush-all`: Compresses and overwrites all JPG images in the current directory. The resulting images are similar in quality to the original images but are smaller in size. ![JPG Crush All Example](assets/functions/JPGCrush-All.png)
 
-`intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression. This is useful for finding lines in a file that contain integers that are within a certain range. For example, `intsrc ">= 0" "<= 100" --file file.txt` will print all lines in `file.txt` that contain integers between 0 and 100 inclusive.
+`intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression. This is useful for finding lines in a file that contain integers that are within a certain range. For example, `intsrc "x >= 0 && x <= 100" --file file.txt` will print all lines in `file.txt` that contain integers between 0 and 100 inclusive. `x` must be the variable that represents the integer in the expression. ![IntSrc Example](assets/functions/IntSrc.png)

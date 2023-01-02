@@ -1,3 +1,5 @@
+# Author: Sayeem2004
+
 # File content
 read -r -d '' comments << EOM
 # Compresses and overwrites all PNG images in a folder.

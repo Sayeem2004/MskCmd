@@ -1,3 +1,5 @@
+# Author: Sayeem2004
+
 # File content
 read -r -d '' comments << EOM
 # Loads in ssh identities from apple keychain.

@@ -1,14 +1,12 @@
+# Author: Sayeem2004
+
 # File content
 read -r -d '' comments << EOM
 # Counts the number of lines in the given directory and sorts them by extension type.
 EOM
 
 read -r -d '' comments << EOM
-if [ -z "\$1" ]; then
-    cargo run --release --manifest-path $1/Cargo.toml --bin tally
-else
-    cargo run --release --manifest-path $1/Cargo.toml --bin tally -- \$1
-fi
+cargo run --release --quiet --manifest-path $1/Cargo.toml --bin tally -- "\$@"
 EOM
 
 # Adding content to function file

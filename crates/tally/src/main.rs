@@ -1,3 +1,4 @@
+// Author: Sayeem2004
 use std::{collections::HashMap, env, fs, path::Path, time::Instant};
 use walkdir::WalkDir;
 
@@ -20,11 +21,23 @@ const LANGS: [&str; 26] = [
 ];
 
 /**
+ * Size of number padding for second counting.
+ */
+const PAD: usize = 4;
+
+/**
  * This program takes a directory as an argument and prints the number of lines in each file type.
  */
 pub fn main() {
     // Variable declarations
     let args: Vec<String> = env::args().collect();
+
+    // Checking to see if there are too many arguments
+    if args.len() > 2 {
+        println!("Incorrect number of arguments");
+        println!("Correct usage: tally [directory]");
+        return;
+    }
 
     // Setting path to appropriate value
     let path: &Path = if args.len() == 1 {
@@ -38,7 +51,7 @@ pub fn main() {
     if fs::metadata(path).is_ok() {
         assert!(env::set_current_dir(path).is_ok());
     } else {
-        println!("The directory {} does not exist", path_string);
+        println!("The directory \"{}\" does not exist", path_string);
         return;
     }
 
@@ -49,12 +62,12 @@ pub fn main() {
 /**
  * This function prints the number of lines in each file type.
  */
-pub fn print_lines() {
+fn print_lines() {
     // Variable declarations
     let mut dict: HashMap<String, usize> = HashMap::new();
     let start: Instant = Instant::now();
     let mut prev: u64 = 0;
-    println!("Time elapsed: {} seconds", prev);
+    println!("Time elapsed: {} seconds", format!("{:0w$}", prev, w = PAD));
 
     // Iterating through all files and directories
     for entry in WalkDir::new(".").into_iter().filter_map(|e| e.ok()) {
@@ -83,7 +96,7 @@ pub fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("Time elapsed: {} seconds", curr);
+            println!("Time elapsed: {} seconds", format!("{:0w$}", prev, w = PAD));
             prev = curr;
         }
     }
@@ -93,10 +106,14 @@ pub fn print_lines() {
     let mut mx_key_prog: usize = 0;
     let mut mx_line_total: usize = 0;
     let mut mx_line_prog: usize = 0;
+
+    // Iterating through dictionary
     for (key, value) in dict.iter() {
+        // Updating max length of total extensions
         mx_key_total = mx_key_total.clamp(key.len(), SIZE);
         mx_line_total = mx_line_total.clamp(value.to_string().len(), SIZE);
 
+        // Updating max length of programming language extensions
         if is_lang(key) {
             mx_key_prog = mx_key_prog.clamp(key.len(), SIZE);
             mx_line_prog = mx_line_prog.clamp(value.to_string().len(), SIZE);
@@ -105,7 +122,7 @@ pub fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("Time elapsed: {} seconds", curr);
+            println!("Time elapsed: {} seconds", format!("{:0w$}", prev, w = PAD));
             prev = curr;
         }
     }
@@ -113,14 +130,17 @@ pub fn print_lines() {
     // Sorting and formatting lines to print
     let mut total: Vec<String> = Vec::new();
     let mut prog: Vec<String> = Vec::new();
+
+    // Iterating through dictionary
     for (key, _value) in dict.iter() {
+        // Formatting key and value
         let mut key_clone: String = key.clone();
         let mut value: String = _value.to_string();
-
         key_clone.truncate(mx_key_total);
         value.truncate(mx_line_total);
         let mut value_clone: usize = value.parse::<usize>().unwrap();
 
+        // Adding to total
         total.push(format!(
             "{:w1$} : {:0w2$}",
             key_clone,
@@ -129,11 +149,14 @@ pub fn print_lines() {
             w2 = mx_line_total
         ));
 
+        // Programming language case
         if is_lang(key) {
+            // Formatting key and value
             key_clone.truncate(mx_key_prog);
             value.truncate(mx_line_prog);
             value_clone = value.parse::<usize>().unwrap();
 
+            // Adding to programming languages
             prog.push(format!(
                 "{:w1$} : {:0w2$}",
                 key_clone,
@@ -146,10 +169,12 @@ pub fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("Time elapsed: {} seconds", curr);
+            println!("Time elapsed: {} seconds", format!("{:0w$}", prev, w = PAD));
             prev = curr;
         }
     }
+
+    // Sorting lines
     total.sort();
     prog.sort();
 
@@ -192,7 +217,7 @@ pub fn print_lines() {
 /**
  * This function returns true if the extension is a programming language.
  */
-pub fn is_lang(extension: &String) -> bool {
+fn is_lang(extension: &String) -> bool {
     // Checking if extension is in list
     for lang in LANGS {
         if extension == &String::from(lang) {
