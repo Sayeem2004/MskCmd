@@ -16,7 +16,7 @@ zsh_functions=$ZDOTDIR/.zsh_functions
 mkdir -p $zsh_functions
 
 # Installing functions to the .zsh_functions directory
-echo "    Installing intsrc..." && $1/functions/intsrc.sh $1
+echo "    Installing intsrc..." && $1/functions/intsrc.sh $1/crates
 [ -e $zsh_functions/intsrc ] || echo "    Failed to install intsrc"
 
 echo "    Installing jpgcrush-all..." && $1/functions/jpgcrush-all.sh $1
@@ -28,5 +28,5 @@ echo "    Installing pngcrush-all..." && $1/functions/pngcrush-all.sh $1
 echo "    Installing sshload..." && $1/functions/sshload.sh $1
 [ -e $zsh_functions/sshload ] || echo "    Failed to install sshload"
 
-echo "    Installing tally..." && $1/functions/tally.sh $1
+echo "    Installing tally..." && $1/functions/tally.sh $1/crates
 [ -e $zsh_functions/tally ] || echo "    Failed to install tally"

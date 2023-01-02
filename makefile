@@ -7,6 +7,7 @@ NULL :=
 TAB  := $(NULL)    $(NULL)
 
 repo_path     := $(shell pwd)
+crate_path    := $(repo_path)/crates
 function_path := $(repo_path)/functions
 script_path   := $(repo_path)/scripts
 
@@ -15,8 +16,8 @@ all: clean configure_functions configure_brew configure_coding build
 
 clean:
 	$(info Cleaning Repo...)
-	$(info $(TAB)cargo clean)
-	@cargo clean
+	$(info $(TAB)cargo clean --release)
+	@cargo clean --release --manifest-path $(crate_path)/Cargo.toml
 	$(info $(TAB)rm -rf $(repo_path)/bin)
 	@rm -rf $(repo_path)/bin
 
@@ -41,4 +42,4 @@ update_permission:
 
 build:
 	$(info Building Repo...)
-	@cargo build --release
+	@cargo build --release --manifest-path $(crate_path)/Cargo.toml
