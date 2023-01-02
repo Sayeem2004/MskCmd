@@ -6,4 +6,4 @@ echo "    Installing nothing yet..."
 count=0
 
 # Printing utility count
-echo "Installed $count utilities"
+echo "    Installed $count utilities"

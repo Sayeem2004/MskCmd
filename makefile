@@ -10,6 +10,8 @@ repo_path     := $(shell pwd)
 crate_path    := $(repo_path)/crates
 function_path := $(repo_path)/functions
 script_path   := $(repo_path)/scripts
+sh_count      := $(shell echo $(script_path)/* $(function_path)/* | wc -w | tr -d ' ')
+rs_count	  := $(shell echo $(crate_path)/* | wc -w | tr -d ' ')
 
 all: configure_functions configure_brew configure_coding build
 	$(info Finished configuring ZSH)
@@ -32,14 +34,18 @@ update_permission:
 	@chmod +x $(function_path)/*
 	$(info $(TAB)chmod +x $(script_path)/*...)
 	@chmod +x $(script_path)/*
+	$(info $(TAB)Updated $(sh_count) files)
 
-build:
+build: build_help
+	$(info $(TAB)Built $(rs_count) crates)
+
+build_help:
 	$(info Building Repo...)
-	@cargo build --release --manifest-path $(crate_path)/Cargo.toml
+	@cargo build --release --manifest-path $(repo_path)/Cargo.toml
 
 clean:
 	$(info Cleaning Repo...)
 	$(info $(TAB)cargo clean --release...)
-	@cargo clean --release --manifest-path $(crate_path)/Cargo.toml
+	@cargo clean --release --manifest-path $(repo_path)/Cargo.toml
 	$(info $(TAB)rm -rf $(repo_path)/bin...)
 	@rm -rf $(repo_path)/bin

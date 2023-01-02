@@ -112,4 +112,4 @@ brew list tree &> /dev/null || brew install tree &> /dev/null
 brew list tree &> /dev/null && let ++count || echo "    Failed to install tree."
 
 # Printing package count
-echo "Installed $count packages"
+echo "    Installed $count packages"

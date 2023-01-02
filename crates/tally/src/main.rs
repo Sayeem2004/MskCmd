@@ -74,7 +74,8 @@ fn print_lines() {
         // Checking to see if it is a file
         if entry.file_type().is_file() {
             // Reading file and getting extension and lines
-            let file: String = fs::read_to_string(entry.path()).unwrap_or_else(|_| String::from(""));
+            let file: String =
+                fs::read_to_string(entry.path()).unwrap_or_else(|_| String::from(""));
             let extension: String = entry
                 .path()
                 .extension()
@@ -96,7 +97,7 @@ fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("Time elapsed: {} seconds", format!("{:0w$}", prev, w = PAD));
+            println!("Time elapsed: {} seconds", format!("{:0w$}", curr, w = PAD));
             prev = curr;
         }
     }
@@ -122,7 +123,7 @@ fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("Time elapsed: {} seconds", format!("{:0w$}", prev, w = PAD));
+            println!("Time elapsed: {} seconds", format!("{:0w$}", curr, w = PAD));
             prev = curr;
         }
     }
@@ -169,7 +170,7 @@ fn print_lines() {
         // Printing time elapsed
         let curr: u64 = start.elapsed().as_secs();
         if curr > prev {
-            println!("Time elapsed: {} seconds", format!("{:0w$}", prev, w = PAD));
+            println!("Time elapsed: {} seconds", format!("{:0w$}", curr, w = PAD));
             prev = curr;
         }
     }
