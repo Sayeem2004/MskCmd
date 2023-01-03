@@ -15,6 +15,8 @@ Installs `brew` if it is not already installed.
 Uses `brew` to install the following packages.
 
 ```txt
+bat:                        Cat clone with syntax highlighting
+
 gcc:                        GNU compiler collection for C and C++
 |-- gmp:                    (Dependency)
 |-- isl:                    (Dependency)
@@ -48,7 +50,7 @@ tree:                       Display directories as trees
 
 ## Coding
 
-## Functions
+## Function
 
 Creates the `$ZDOTDIR/.zsh_functions` directory, adds it to the `fpath` variable, and then adds the following functions to the directory.
 
@@ -77,6 +79,8 @@ The full list of packages installed by `brew` is provided below. Use the followi
 `brew uninstall [package]` Uninstalls the specified package.
 
 ```txt
+bat:                        Cat clone with syntax highlighting
+
 gcc:                        GNU compiler collection for C and C++
 |-- gmp:                    (Dependency)
 |-- isl:                    (Dependency)
