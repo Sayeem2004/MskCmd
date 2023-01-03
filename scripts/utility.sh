@@ -12,6 +12,37 @@ printf "\e[0m"
 # Utility count
 let count=0
 
+# Setting tab size to 4
+zshrc=$ZDOTDIR/.zshrc
+printf "\t\tConfiguring tabs...\n"
+read -r -d '' zshrc_content << EOM
+tabs -4
+EOM
+if ! grep -q "$zshrc_content" $zshrc; then
+    echo "$zshrc_content" >> $zshrc
+fi
+if grep -q "$zshrc_content" $zshrc; then
+    let ++count
+else
+    printf "\t\tFailed to configure tabs\n"
+fi
+
+# Setting bat theme
+zshrc=$ZDOTDIR/.zshrc
+printf "\t\tConfiguring bat...\n"
+read -r -d '' zshrc_content << EOM
+# Sayeem2004's ZSH Customization
+export BAT_THEME="Nord"
+EOM
+if ! grep -q "$zshrc_content" $zshrc; then
+    echo "$zshrc_content" >> $zshrc
+fi
+if grep -q "$zshrc_content" $zshrc; then
+    let ++count
+else
+    printf "\t\tFailed to configure bat\n"
+fi
+
 # Printing utility count
 printf "\e[1;32m"
 printf "\tConfigured $count Utilities\n"
