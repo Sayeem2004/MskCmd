@@ -24,8 +24,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aacfb566035f8cd02f6ec9247c242f3f9904a0b288ea383abcf4e95df6436a34"
 
 [[package]]
-name = "intsrc"
+name = "gview"
 version = "0.1.0"
+
+[[package]]
+name = "intsrc"
+version = "0.1.1"
 dependencies = [
  "evalexpr",
  "regex",
@@ -95,7 +99,7 @@ dependencies = [
 
 [[package]]
 name = "tally"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "termion",
  "walkdir",

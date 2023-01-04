@@ -10,6 +10,7 @@ printf "\tBuilding Rust Crates...\n"
 printf "\e[0m"
 
 # Printing the crates
+printf "\t\tBuilding gview...\n"
 printf "\t\tBuilding intsrc...\n"
 printf "\t\tBuilding tally...\n"
 

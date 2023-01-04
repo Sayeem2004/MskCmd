@@ -16,7 +16,7 @@ Installs `brew` if it is not already installed.
 
 Uses `brew` to install the following packages.
 
-```md
+```txt
 `bat`:                      Cat clone with syntax highlighting
 
 `gcc`:                      GNU compiler collection for C and C++
@@ -56,7 +56,7 @@ Configures the following utilities as described below. Some of these utilities a
 
 These configurations are loaded automatically when the shell is started through the `$ZDOTDIR/.zshrc` file.
 
-```md
+```txt
 `tabs`: Configures tabs to be 4 spaces wide.
 `bat`: Configures `bat` to use the `Nord` theme.
 ```
@@ -67,7 +67,7 @@ Creates the `$ZDOTDIR/.zsh_functions` directory, adds it to the `fpath` variable
 
 These functions are loaded automatically when the shell is started through the `$ZDOTDIR/.zshrc` file.
 
-```md
+```txt
 `tally [path]`: Counts the number of lines in the given directory and sorts them by extension type.
 `sshload`: Loads in SSH identities from apple keychain.
 `pngcrush-all`: Compresses and overwrites all PNG images in the current directory.
@@ -85,7 +85,7 @@ The full list of packages installed by `brew` is provided below. Use the followi
 
 `brew uninstall [package]` Uninstalls the specified package.
 
-```md
+```txt
 `bat`:                      Cat clone with syntax highlighting
 
 `gcc`:                      GNU compiler collection for C and C++
@@ -123,7 +123,7 @@ The full list of packages installed by `brew` is provided below. Use the followi
 
 To remove a specific utility configuration, follow the instructions below.
 
-```md
+```txt
 `tabs`: Remove the `tabs -4` line from the `$ZDOTDIR/.zshrc` file.
 `bat`: Remove the `export BAT_THEME="Nord"` line from the `$ZDOTDIR/.zshrc` file.
 ```
@@ -132,14 +132,14 @@ To remove a specific utility configuration, follow the instructions below.
 
 To remove all functions go to the `$ZDOTDIR/.zshrc` file and remove the following lines. Then delete the `$ZDOTDIR/.zsh_functions` directory.
 
-```md
+```txt
 `fpath=($ZDOTDIR/.zsh_functions $fpath)`
 `autoload -U $fpath[1]/*(.:t)`
 ```
 
 To remove a specific function, go to the `$ZDOTDIR/.zsh_functions` directory and remove the corresponding file. The list of functions is provided below.
 
-```md
+```txt
 `tally [path]`: Counts the number of lines in the given directory and sorts them by extension type.
 `sshload`: Loads in SSH identities from apple keychain.
 `pngcrush-all`: Compresses and overwrites all PNG images in the current directory.
