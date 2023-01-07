@@ -1,5 +1,3 @@
-# Author: Sayeem2004
-
 # File content
 read -r -d '' comments << EOM
 # Counts the number of lines in the given directory and sorts them by extension type.

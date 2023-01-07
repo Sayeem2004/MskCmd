@@ -1,5 +1,3 @@
-# Author: Sayeem2004
-
 # File content
 read -r -d '' comments << EOM
 # Prints the lines in a file that contain integers that satisfy the given expression.

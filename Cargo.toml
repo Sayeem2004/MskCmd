@@ -2,5 +2,4 @@
 members = [
     "crates/tally",
     "crates/intsrc",
-    "crates/gview",
 ]

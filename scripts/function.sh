@@ -1,4 +1,3 @@
-# Author: Sayeem2004
 # $1 = REPO_PATH
 # $2 = CRATE_PATH
 # $3 = FUNCTION_PATH
@@ -6,7 +5,7 @@
 
 # Printing start message
 printf "\e[1;32m"
-printf "\tWriting ZSH Functions...\n"
+printf "Writing ZSH Functions...\n"
 printf "\e[0m"
 
 # Updating the .zshrc file
@@ -27,18 +26,20 @@ mkdir -p $zsh_functions
 let count=0
 
 # Writing functions to the .zsh_functions directory
-printf "\t\tWriting intsrc...\n" && $3/intsrc.sh $1
-[ -e $zsh_functions/intsrc ] && let ++count || printf "\t\tFailed to write intsrc\n"
-printf "\t\tWriting jpgcrush-all...\n" && $3/jpgcrush-all.sh $1
-[ -e $zsh_functions/jpgcrush-all ] && let ++count || printf "\t\tFailed to write jpgcrush-all\n"
-printf "\t\tWriting pngcrush-all...\n" && $3/pngcrush-all.sh $1
-[ -e $zsh_functions/pngcrush-all ] && let ++count || printf "\t\tFailed to write pngcrush-all\n"
-printf "\t\tWriting sshload...\n" && $3/sshload.sh $1
-[ -e $zsh_functions/sshload ] && let ++count || printf "\t\tFailed to write sshload\n"
-printf "\t\tWriting tally...\n" && $3/tally.sh $1
-[ -e $zsh_functions/tally ] && let ++count || printf "\t\tFailed to write tally\n"
+printf "\tWriting gview...\n" && $3/gview.sh $1
+[ -e $zsh_functions/gview ] && let ++count || printf "\tFailed to write gview\n"
+printf "\tWriting intsrc...\n" && $3/intsrc.sh $1
+[ -e $zsh_functions/intsrc ] && let ++count || printf "\tFailed to write intsrc\n"
+printf "\tWriting jpgcrush-all...\n" && $3/jpgcrush-all.sh $1
+[ -e $zsh_functions/jpgcrush-all ] && let ++count || printf "\tFailed to write jpgcrush-all\n"
+printf "\tWriting pngcrush-all...\n" && $3/pngcrush-all.sh $1
+[ -e $zsh_functions/pngcrush-all ] && let ++count || printf "\tFailed to write pngcrush-all\n"
+printf "\tWriting sshload...\n" && $3/sshload.sh $1
+[ -e $zsh_functions/sshload ] && let ++count || printf "\tFailed to write sshload\n"
+printf "\tWriting tally...\n" && $3/tally.sh $1
+[ -e $zsh_functions/tally ] && let ++count || printf "\tFailed to write tally\n"
 
 # Printing end message
 printf "\e[1;32m"
-printf "\tWrote $count Functions\n"
+printf "Wrote $count Functions\n"
 printf "\e[0m"

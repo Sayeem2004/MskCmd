@@ -1,4 +1,3 @@
-# Author: Sayeem2004
 # $1 = REPO_PATH
 # $2 = CRATE_PATH
 # $3 = FUNCTION_PATH
@@ -6,7 +5,7 @@
 
 # Printing start message
 printf "\e[1;32m"
-printf "\tConfiguring Utility Settings...\n"
+printf "Configuring Utility Settings...\n"
 printf "\e[0m"
 
 # Utility count
@@ -14,7 +13,7 @@ let count=0
 
 # Setting tab size to 4
 zshrc=$ZDOTDIR/.zshrc
-printf "\t\tConfiguring tabs...\n"
+printf "\tConfiguring tabs...\n"
 read -r -d '' zshrc_content << EOM
 tabs -4
 EOM
@@ -24,12 +23,12 @@ fi
 if grep -q "$zshrc_content" $zshrc; then
     let ++count
 else
-    printf "\t\tFailed to configure tabs\n"
+    printf "\tFailed to configure tabs\n"
 fi
 
 # Setting bat theme
 zshrc=$ZDOTDIR/.zshrc
-printf "\t\tConfiguring bat...\n"
+printf "\tConfiguring bat...\n"
 read -r -d '' zshrc_content << EOM
 # Sayeem2004's ZSH Customization
 export BAT_THEME="Nord"
@@ -40,10 +39,10 @@ fi
 if grep -q "$zshrc_content" $zshrc; then
     let ++count
 else
-    printf "\t\tFailed to configure bat\n"
+    printf "\tFailed to configure bat\n"
 fi
 
 # Printing utility count
 printf "\e[1;32m"
-printf "\tConfigured $count Utilities\n"
+printf "Configured $count Utilities\n"
 printf "\e[0m"

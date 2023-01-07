@@ -1,4 +1,3 @@
-# Author: Sayeem2004
 # $1 = REPO_PATH
 # $2 = CRATE_PATH
 # $3 = FUNCTION_PATH
