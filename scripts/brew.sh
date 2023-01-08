@@ -18,11 +18,6 @@ cellar=$(brew --cellar)
 caskroom=$(brew --caskroom)
 let count=0
 
-# Installing bat
-printf "\tInstalling bat...\n"
-test -d $cellar/bat || brew install bat &> /dev/null
-test -d $cellar/bat && let ++count || printf "\tFailed to install bat\n"
-
 # Installing gcc
 printf "\tInstalling cmake...\n"
 test -d $cellar/cmake || brew install cmake &> /dev/null
@@ -68,6 +63,11 @@ printf "\tInstalling pngcrush...\n"
 test -d $cellar/pngcrush || brew install pngcrush &> /dev/null
 test -d $cellar/pngcrush && let ++count || printf "\tFailed to install pngcrush\n"
 
+# Installing tree
+printf "\tInstalling tree...\n"
+test -d $cellar/tree || brew install tree &> /dev/null
+test -d $cellar/tree && let ++count || printf "\tFailed to install tree\n"
+
 # Installing python
 printf "\tInstalling ca-certificates...\n"
 test -d $cellar/ca-certificates || brew install ca-certificates &> /dev/null
@@ -94,20 +94,20 @@ printf "\tInstalling python@3.10...\n"
 test -d $cellar/python@3.10 || brew install python@3.10 &> /dev/null
 test -d $cellar/python@3.10 && let ++count || printf "\tFailed to install python@3.10\n"
 
-# Installing rustup-init
-printf "\tInstalling rustup-init...\n"
-test -d $cellar/rustup-init || brew install rustup-init &> /dev/null
-test -d $cellar/rustup-init && let ++count || printf "\tFailed to install rustup-init\n"
+# Installing bat
+printf "\tInstalling bat...\n"
+test -d $cellar/bat || brew install bat &> /dev/null
+test -d $cellar/bat && let ++count || printf "\tFailed to install bat\n"
 
 # Installing tealdeer
 printf "\tInstalling tealdeer...\n"
 test -d $cellar/tealdeer || brew install tealdeer &> /dev/null
 test -d $cellar/tealdeer && let ++count || printf "\tFailed to install tealdeer\n"
 
-# Installing tree
-printf "\tInstalling tree...\n"
-test -d $cellar/tree || brew install tree &> /dev/null
-test -d $cellar/tree && let ++count || printf "\tFailed to install tree\n"
+# Performing cleanup commands
+brew update &> /dev/null
+brew upgrade &> /dev/null
+brew cleanup &> /dev/null
 
 # Printing end message
 printf "\e[1;32m"
