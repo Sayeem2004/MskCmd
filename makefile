@@ -27,7 +27,7 @@ function:
 
 # Runs Build Script
 build:
-	@cargo build --release --manifest-path $(repo_path)/Cargo.toml
+	@$(script_path)/build.sh $(repo_path) $(crate_path) $(function_path) $(script_path)
 
 # Cleans Rust Crates
 clean:

@@ -1,9 +1,11 @@
+#!/bin/zsh
+
 # File content
-read -r -d '' comments << EOM
+read -r -d '' function_comments << EOM
 # Compresses and overwrites all PNG images in a folder.
 EOM
 
-read -r -d '' commands << EOM
+read -r -d '' function_commands << EOM
 for png in *.png(.N); do
 	printf "\\\\n"
 	pngcrush -ow "\$png"
@@ -13,5 +15,5 @@ EOM
 
 # Adding content to function file
 path_to_function=$ZDOTDIR/.zsh_functions/pngcrush-all
-echo "$comments" > $path_to_function
-echo "$commands" >> $path_to_function
+echo "$function_comments" > $path_to_function
+echo "$function_commands" >> $path_to_function

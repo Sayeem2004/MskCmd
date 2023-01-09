@@ -1,7 +1,5 @@
-# $1 = REPO_PATH
-# $2 = CRATE_PATH
-# $3 = FUNCTION_PATH
-# $4 = SCRIPT_PATH
+#!/bin/zsh
+# $1 = REPO_PATH, $2 = CRATE_PATH, $3 = FUNCTION_PATH, $4 = SCRIPT_PATH
 
 # Printing start message
 printf "\e[1;32m"
