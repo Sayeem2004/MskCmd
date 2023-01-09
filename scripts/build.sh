@@ -13,7 +13,7 @@ printf "    Building gview...\n"
 
 # Building and counting the crates
 cargo build --release --manifest-path $1/Cargo.toml
-let count="$(ls target/release | grep -c "*.d")"
+let count="$(ls -l target/release | grep -c "\.d")"
 
 # Printing end message
 printf "\e[1;32m"
