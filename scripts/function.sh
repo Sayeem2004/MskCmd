@@ -1,41 +1,54 @@
 #!/bin/zsh
 # $1 = REPO_PATH, $2 = CRATE_PATH, $3 = FUNCTION_PATH, $4 = SCRIPT_PATH
 
+# Defining utility variables
+_SIZE_="40"
+_PRE_="%-${_SIZE_}s"
+_MAX_=$(( ($COLUMNS - 4) / $_SIZE_ ))
+
+# Defining utility functions
+red() {printf "\e[1;31m";}
+blue() {printf "\e[1;32m";}
+no() {printf "\e[0m";}
+new() {expr $count % $_MAX_ &> /dev/null || printf "\n    ";}
+title() {blue && printf "$1\n" && no}
+info() {printf $_PRE_ "$1" && let ++count && new}
+err() {red && printf $_PRE_ "$1" && no && let ++count && new}
+
 # Printing start message
-printf "\e[1;32m"
-printf "Writing ZSH Functions...\n"
-printf "\e[0m"
+title "    Writing ZSH Functions..."
+printf "    "
 
 # Function count and path variables
 zsh_functions=$ZDOTDIR/.zsh_functions
 mkdir -p $zsh_functions
 let count=0
+let valid=0
 
 # Writing sshload
-printf "    Writing sshload...\n" && $3/sshload.sh $1
-[ -e $zsh_functions/sshload ] && let ++count || printf "    Failed to write sshload\n"
+info "Writing sshload..." && $3/sshload.sh $1
+[ -e $zsh_functions/sshload ] && let ++valid || err "Failed to write sshload"
 
 # Writing pngcrush-all
-printf "    Writing pngcrush-all...\n" && $3/pngcrush-all.sh $1
-[ -e $zsh_functions/pngcrush-all ] && let ++count || printf "    Failed to write pngcrush-all\n"
+info "Writing pngcrush-all..." && $3/pngcrush-all.sh $1
+[ -e $zsh_functions/pngcrush-all ] && let ++valid || err "Failed to write pngcrush-all"
 
 # Writing tally
-printf "    Writing tally...\n" && $3/tally.sh $1
-[ -e $zsh_functions/tally ] && let ++count || printf "    Failed to write tally\n"
+info "Writing tally..." && $3/tally.sh $1
+[ -e $zsh_functions/tally ] && let ++valid || err "Failed to write tally"
 
 # Writing jpgcrush-all
-printf "    Writing jpgcrush-all...\n" && $3/jpgcrush-all.sh $1
-[ -e $zsh_functions/jpgcrush-all ] && let ++count || printf "    Failed to write jpgcrush-all\n"
+info "Writing jpgcrush-all..." && $3/jpgcrush-all.sh $1
+[ -e $zsh_functions/jpgcrush-all ] && let ++valid || err "Failed to write jpgcrush-all"
 
 # Writing intsrc
-printf "    Writing intsrc...\n" && $3/intsrc.sh $1
-[ -e $zsh_functions/intsrc ] && let ++count || printf "    Failed to write intsrc\n"
+info "Writing intsrc..." && $3/intsrc.sh $1
+[ -e $zsh_functions/intsrc ] && let ++valid || err "Failed to write intsrc"
 
 # Writing gview
-printf "    Writing gview...\n" && $3/gview.sh $1
-[ -e $zsh_functions/gview ] && let ++count || printf "    Failed to write gview\n"
+info "Writing gview..." && $3/gview.sh $1
+[ -e $zsh_functions/gview ] && let ++valid || err "Failed to write gview"
 
 # Printing end message
-printf "\e[1;32m"
-printf "Wrote $count Functions\n"
-printf "\e[0m"
+expr $count % $_MAX_ &> /dev/null && printf "\n    "
+title "Wrote $valid Functions"

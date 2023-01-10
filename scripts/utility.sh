@@ -1,64 +1,78 @@
 #!/bin/zsh
 # $1 = REPO_PATH, $2 = CRATE_PATH, $3 = FUNCTION_PATH, $4 = SCRIPT_PATH
 
+# Defining utility variables
+_SIZE_="40"
+_PRE_="%-${_SIZE_}s"
+_MAX_=$(( ($COLUMNS - 4) / $_SIZE_ ))
+
+# Defining utility functions
+red() {printf "\e[1;31m";}
+blue() {printf "\e[1;32m";}
+no() {printf "\e[0m";}
+new() {expr $count % $_MAX_ &> /dev/null || printf "\n    ";}
+title() {blue && printf "$1\n" && no}
+info() {printf $_PRE_ "$1" && let ++count && new}
+err() {red && printf $_PRE_ "$1" && no && let ++count && new}
+
 # Printing start message
-printf "\e[1;32m"
-printf "Configuring Utility Settings...\n"
-printf "\e[0m"
+title "    Configuring Utility Settings..."
+printf "    "
 
 # Utility count and path variables
 zshrc=$ZDOTDIR/.zshrc
 [ -e $zshrc ] || touch $zshrc
 let count=0
+let valid=0
 
 # Configuring the zshrc file
-printf "    Configuring zshrc...\n"
+info "Configuring zshrc..."
 read -r -d '' zshrc_content << EOM
 # Sayeem2004's ZSH Customization
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure zshrc\n"
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure zshrc"
 
 # Configuring functions path
-printf "    Configuring functions...\n"
+info "Configuring functions..."
 read -r -d '' zshrc_content << EOM
 fpath=(\$ZDOTDIR/.zsh_functions \$fpath)
 autoload -U \$fpath[1]/*(.:t)
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure functions\n"
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure functions"
 
 # Configuring tab size
-printf "    Configuring tabs...\n"
+info "Configuring tabs..."
 read -r -d '' zshrc_content << EOM
 tabs -4 # Set tab size to 4
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure tabs\n"
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure tabs"
 
 # Configuring bat theme
-printf "    Configuring bat...\n"
+info "Configuring bat..."
 read -r -d '' zshrc_content << EOM
 export BAT_THEME="Nord"
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure bat\n"
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure bat"
 
 # Configuring default python
-printf "    Configuring python...\n"
+info "Configuring python..."
 read -r -d '' zshrc_content << EOM
 alias python=python3
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure python\n"
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure python"
 
 # Configuring rust installation
-printf "    Configuring rust...\n"
+info "Configuring rust..."
 read -r -d '' zshrc_content << EOM
 export CARGO_HOME=\$HOME/.config/cargo
 export RUSTUP_HOME=\$HOME/.config/rustup
@@ -66,20 +80,20 @@ EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
 rustc -V &> /dev/null || rustup-init -y &> /dev/null
-(grep -q "$zshrc_content" $zshrc && rustc -V &> /dev/null && let ++count) \
-|| printf "    Failed to install rust\n"
+grep -q "$zshrc_content" $zshrc && rustc -V &> /dev/null && let ++valid \
+|| err "Failed to install rust"
 
 # Configuring less history
-printf "    Configuring less...\n"
+info "Configuring less..."
 read -r -d '' zshrc_content << EOM
 export LESSHISTFILE=/dev/null
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure less\n"
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure less"
 
 # Configuring sdkman installation
-printf "    Configuring sdkman...\n"
+info "Configuring sdkman..."
 read -r -d '' zshrc_content << EOM
 export SDKMAN_DIR="/Users/Najmoon/.config/sdkman"
 [[ -s "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh" ]] \\\\
@@ -92,16 +106,15 @@ sdk version &> /dev/null || curl -s "https://get.sdkman.io?rcupdate=false" | zsh
 
 [[ -s "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh" ]] \
 && source "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh"
-(grep -Fq "$zshrc_content" $zshrc && sdk version &> /dev/null && let ++count) \
-|| printf "    Failed to install sdkman\n"
+grep -Fq "$zshrc_content" $zshrc && sdk version &> /dev/null && let ++valid \
+|| err "Failed to install sdkman"
 sdk update &> /dev/null
 
 # Configuring java installation
-printf "    Configuring java...\n"
+info "Configuring java..."
 java --version &> /dev/null || sdk install java &> /dev/null
-java --version &> /dev/null && let ++count || printf "    Failed to install java\n"
+java --version &> /dev/null && let ++valid || err "Failed to install java"
 
 # Printing utility count
-printf "\e[1;32m"
-printf "Configured $count Utilities\n"
-printf "\e[0m"
+expr $count % $_MAX_ &> /dev/null && printf "\n    "
+title "Configured $valid Utilities"

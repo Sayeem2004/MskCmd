@@ -1,126 +1,140 @@
 #!/bin/zsh
 # $1 = REPO_PATH, $2 = CRATE_PATH, $3 = FUNCTION_PATH, $4 = SCRIPT_PATH
 
+# Defining utility variables
+_SIZE_="40"
+_PRE_="%-${_SIZE_}s"
+_MAX_=$(( ($COLUMNS - 4) / $_SIZE_ ))
+
+# Defining utility functions
+red() {printf "\e[1;31m";}
+blue() {printf "\e[1;32m";}
+no() {printf "\e[0m";}
+new() {expr $count % $_MAX_ &> /dev/null || printf "\n    ";}
+title() {blue && printf "$1\n" && no}
+info() {printf $_PRE_ "$1" && let ++count && new}
+err() {red && printf $_PRE_ "$1" && no && let ++count && new}
+
 # Printing start message
-printf "\e[1;32m"
-printf "Installing Brew Packages...\n"
-printf "\e[0m"
+title "    Installing Brew Packages..."
+printf "    "
 
 # Installing homebrew.
 brew -v &> /dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Package count and path variables
+# Variable declarations
 cellar=$(brew --cellar)
 caskroom=$(brew --caskroom)
+let valid=0
 let count=0
 
 # Installing gcc
-printf "    Installing cmake...\n"
+info "Installing cmake..."
 test -d $cellar/cmake || brew install cmake &> /dev/null
-test -d $cellar/cmake && let ++count || printf "    Failed to install cmake\n"
+test -d $cellar/cmake && let ++valid || err "Failed to install cmake"
 
-printf "    Installing lz4...\n"
+info "Installing lz4..."
 test -d $cellar/lz4 || brew install lz4 &> /dev/null
-test -d $cellar/lz4 && let ++count || printf "    Failed to install lz4\n"
+test -d $cellar/lz4 && let ++valid || err "Failed to install lz4"
 
-printf "    Installing texinfo...\n"
+info "Installing texinfo..."
 test -d $cellar/texinfo || brew install texinfo &> /dev/null
-test -d $cellar/texinfo && let ++count || printf "    Failed to install texinfo\n"
+test -d $cellar/texinfo && let ++valid || err "Failed to install texinfo"
 
-printf "    Installing xz...\n"
+info "Installing xz..."
 test -d $cellar/xz || brew install xz &> /dev/null
-test -d $cellar/xz && let ++count || printf "    Failed to install xz\n"
+test -d $cellar/xz && let ++valid || err "Failed to install xz"
 
-printf "    Installing gmp...\n"
+info "Installing gmp..."
 test -d $cellar/gmp || brew install gmp &> /dev/null
-test -d $cellar/gmp && let ++count || printf "    Failed to install gmp\n"
+test -d $cellar/gmp && let ++valid || err "Failed to install gmp"
 
-printf "    Installing isl...\n"
+info "Installing isl..."
 test -d $cellar/isl || brew install isl &> /dev/null
-test -d $cellar/isl && let ++count || printf "    Failed to install isl\n"
+test -d $cellar/isl && let ++valid || err "Failed to install isl"
 
-printf "    Installing libmpc...\n"
+info "Installing libmpc..."
 test -d $cellar/libmpc || brew install libmpc &> /dev/null
-test -d $cellar/libmpc && let ++count || printf "    Failed to install libmpc\n"
+test -d $cellar/libmpc && let ++valid || err "Failed to install libmpc"
 
-printf "    Installing mpfr...\n"
+info "Installing mpfr..."
 test -d $cellar/mpfr || brew install mpfr &> /dev/null
-test -d $cellar/mpfr && let ++count || printf "    Failed to install mpfr\n"
+test -d $cellar/mpfr && let ++valid || err "Failed to install mpfr"
 
-printf "    Installing zstd...\n"
+info "Installing zstd..."
 test -d $cellar/zstd || brew install zstd &> /dev/null
-test -d $cellar/zstd && let ++count || printf "    Failed to install zstd\n"
+test -d $cellar/zstd && let ++valid || err "Failed to install zstd"
 
-printf "    Installing gcc...\n"
+info "Installing gcc..."
 test -d $cellar/gcc || brew install gcc &> /dev/null
-test -d $cellar/gcc && let ++count || printf "    Failed to install gcc\n"
+test -d $cellar/gcc && let ++valid || err "Failed to install gcc"
 
 # Installing jpegoptim
-printf "    Installing jpeg-turbo...\n"
+info "Installing jpeg-turbo..."
 test -d $cellar/jpeg-turbo || brew install jpeg-turbo &> /dev/null
-test -d $cellar/jpeg-turbo && let ++count || printf "    Failed to install jpeg-turbo\n"
+test -d $cellar/jpeg-turbo && let ++valid || err "Failed to install jpeg-turbo"
 
-printf "    Installing jpegoptim...\n"
+info "Installing jpegoptim..."
 test -d $cellar/jpegoptim || brew install jpegoptim &> /dev/null
-test -d $cellar/jpegoptim && let ++count || printf "    Failed to install jpegoptim\n"
+test -d $cellar/jpegoptim && let ++valid || err "Failed to install jpegoptim"
 
 # Installing pngcrush
-printf "    Installing pngcrush...\n"
+info "Installing pngcrush..."
 test -d $cellar/pngcrush || brew install pngcrush &> /dev/null
-test -d $cellar/pngcrush && let ++count || printf "    Failed to install pngcrush\n"
+test -d $cellar/pngcrush && let ++valid || err "Failed to install pngcrush"
 
 # Installing tree
-printf "    Installing tree...\n"
+info "Installing tree..."
 test -d $cellar/tree || brew install tree &> /dev/null
-test -d $cellar/tree && let ++count || printf "    Failed to install tree\n"
+test -d $cellar/tree && let ++valid || err "Failed to install tree"
 
 # Installing python
-printf "    Installing ca-certificates...\n"
+info "Installing ca-certificates..."
 test -d $cellar/ca-certificates || brew install ca-certificates &> /dev/null
-test -d $cellar/ca-certificates && let ++count || printf "    Failed to install ca-certificates\n"
+test -d $cellar/ca-certificates && let ++valid || err "Failed to install ca-certificates"
 
-printf "    Installing gdbm...\n"
+info "Installing gdbm..."
 test -d $cellar/gdbm || brew install gdbm &> /dev/null
-test -d $cellar/gdbm && let ++count || printf "    Failed to install gdbm\n"
+test -d $cellar/gdbm && let ++valid || err "Failed to install gdbm"
 
-printf "    Installing mpdecimal...\n"
+info "Installing mpdecimal..."
 test -d $cellar/mpdecimal || brew install mpdecimal &> /dev/null
-test -d $cellar/mpdecimal && let ++count || printf "    Failed to install mpdecimal\n"
+test -d $cellar/mpdecimal && let ++valid || err "Failed to install mpdecimal"
 
-printf "    Installing openssl@1.1...\n"
-test -d $cellar/openssl@1.1 || brew install openssl@1.1 &> /dev/null
-test -d $cellar/openssl@1.1 && let ++count || printf "    Failed to install openssl@1.1\n"
+info "Installing openssl@1.1..."
+test -d $cellar/openssl@1.1 || brew install openssel@1.1 &> /dev/null
+test -d $cellar/openssl@1.1 && let ++valid || err "Failed to install openssl@1.1"
 
-printf "    Installing pkg-config...\n"
+info "Installing pkg-config..."
 test -d $cellar/pkg-config || brew install pkg-config &> /dev/null
-test -d $cellar/pkg-config && let ++count || printf "    Failed to install pkg-config\n"
+test -d $cellar/pkg-config && let ++valid || err "Failed to install pkg-config"
 
-printf "    Installing readline...\n"
+info "Installing readline..."
 test -d $cellar/readline || brew install readline &> /dev/null
-test -d $cellar/readline && let ++count || printf "    Failed to install readline\n"
+test -d $cellar/readline && let ++valid || err "Failed to install readline"
 
-printf "    Installing sqlite...\n"
+info "Installing sqlite..."
 test -d $cellar/sqlite || brew install sqlite &> /dev/null
-test -d $cellar/sqlite && let ++count || printf "    Failed to install sqlite\n"
+test -d $cellar/sqlite && let ++valid || err "Failed to install sqlite"
 
-printf "    Installing python@3.10...\n"
+info "Installing python@3.10..."
 test -d $cellar/python@3.10 || brew install python@3.10 &> /dev/null
-test -d $cellar/python@3.10 && let ++count || printf "    Failed to install python@3.10\n"
+test -d $cellar/python@3.10 && let ++valid || err "Failed to install python@3.10"
 
 # Installing bat
-printf "    Installing bat...\n"
+info "Installing bat..."
 test -d $cellar/bat || brew install bat &> /dev/null
-test -d $cellar/bat && let ++count || printf "    Failed to install bat\n"
+test -d $cellar/bat && let ++valid || err "Failed to install bat"
 
 # Installing tealdeer
-printf "    Installing tealdeer...\n"
+info "Installing tealdeer..."
 test -d $cellar/tealdeer || brew install tealdeer &> /dev/null
-test -d $cellar/tealdeer && let ++count || printf "    Failed to install tealdeer\n"
+test -d $cellar/tealdeer && let ++valid || err "Failed to install tealdeer"
 
 # Installing rustup-init
-printf "    Installing rustup-init...\n"
+info "Installing rustup-init..."
 test -d $cellar/rustup-init || brew install rustup-init &> /dev/null
-test -d $cellar/rustup-init && let ++count || printf "    Failed to install rustup-init\n"
+test -d $cellar/rustup-init && let ++valid || err "Failed to install rustup-init"
 
 # Performing cleanup commands
 brew update &> /dev/null
@@ -128,6 +142,5 @@ brew upgrade &> /dev/null
 brew cleanup &> /dev/null
 
 # Printing end message
-printf "\e[1;32m"
-printf "Installed $count Packages\n"
-printf "\e[0m"
+expr $count % $_MAX_ &> /dev/null && printf "\n    "
+title "Installed $valid Packages"
