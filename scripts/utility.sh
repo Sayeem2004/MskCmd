@@ -65,8 +65,41 @@ export RUSTUP_HOME=\$HOME/.config/rustup
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure rust\n"
 rustc -V &> /dev/null || rustup-init -y &> /dev/null
+(grep -q "$zshrc_content" $zshrc && rustc -V &> /dev/null && let ++count) \
+|| printf "    Failed to install rust\n"
+
+# Configuring less history
+printf "    Configuring less...\n"
+read -r -d '' zshrc_content << EOM
+export LESSHISTFILE=/dev/null
+EOM
+
+grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
+grep -q "$zshrc_content" $zshrc && let ++count || printf "    Failed to configure less\n"
+
+# Configuring sdkman installation
+printf "    Configuring sdkman...\n"
+read -r -d '' zshrc_content << EOM
+export SDKMAN_DIR="/Users/Najmoon/.config/sdkman"
+[[ -s "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh" ]] \\\\
+&& source "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh"
+EOM
+
+grep -Fq "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
+export SDKMAN_DIR=$HOME/.config/sdkman
+sdk version &> /dev/null || curl -s "https://get.sdkman.io?rcupdate=false" | zsh &> /dev/null
+
+[[ -s "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh" ]] \
+&& source "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh"
+(grep -Fq "$zshrc_content" $zshrc && sdk version &> /dev/null && let ++count) \
+|| printf "    Failed to install sdkman\n"
+sdk update &> /dev/null
+
+# Configuring java installation
+printf "    Configuring java...\n"
+java --version &> /dev/null || sdk install java &> /dev/null
+java --version &> /dev/null && let ++count || printf "    Failed to install java\n"
 
 # Printing utility count
 printf "\e[1;32m"
