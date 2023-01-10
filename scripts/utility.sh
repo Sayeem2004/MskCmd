@@ -65,7 +65,7 @@ grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure bat"
 # Configuring default python
 info "Configuring python..."
 read -r -d '' zshrc_content << EOM
-alias python=python3
+alias python=python3.11
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
@@ -114,6 +114,23 @@ sdk update &> /dev/null
 info "Configuring java..."
 java --version &> /dev/null || sdk install java &> /dev/null
 java --version &> /dev/null && let ++valid || err "Failed to install java"
+
+# Configuring vim settings
+info "Configuring vim..."
+read -r -d '' zshrc_content << EOM
+export VIMINIT="source \$HOME/.config/vim/.vimrc"
+EOM
+read -r -d '' vimrc_content << EOM
+set viminfo+=n\$HOME/.config/vim/.viminfo
+EOM
+
+vimrc=$HOME/.config/vim/.vimrc
+[ -e $vimrc ] || (mkdir -p $HOME/.config/vim && touch $vimrc)
+
+grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
+grep -q "$vimrc_content" $vimrc || echo "$vimrc_content" >> $vimrc
+grep -q "$zshrc_content" $zshrc && grep -q "$vimrc_content" $vimrc && let ++valid \
+|| err "Failed to configure vim"
 
 # Printing utility count
 expr $count % $_MAX_ &> /dev/null && printf "\n    "

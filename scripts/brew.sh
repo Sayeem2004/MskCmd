@@ -117,9 +117,9 @@ info "Installing sqlite..."
 test -d $cellar/sqlite || brew install sqlite &> /dev/null
 test -d $cellar/sqlite && let ++valid || err "Failed to install sqlite"
 
-info "Installing python@3.10..."
-test -d $cellar/python@3.10 || brew install python@3.10 &> /dev/null
-test -d $cellar/python@3.10 && let ++valid || err "Failed to install python@3.10"
+info "Installing python@3.11..."
+test -d $cellar/python@3.11 || brew install python@3.11 &> /dev/null
+test -d $cellar/python@3.11 && let ++valid || err "Failed to install python@3.11"
 
 # Installing bat
 info "Installing bat..."
@@ -136,9 +136,65 @@ info "Installing rustup-init..."
 test -d $cellar/rustup-init || brew install rustup-init &> /dev/null
 test -d $cellar/rustup-init && let ++valid || err "Failed to install rustup-init"
 
+# Installing node
+info "Installing brotli..."
+test -d $cellar/brotli || brew install brotli &> /dev/null
+test -d $cellar/brotli && let ++valid || err "Failed to install brotli"
+
+info "Installing c-ares..."
+test -d $cellar/c-ares || brew install c-ares &> /dev/null
+test -d $cellar/c-ares && let ++valid || err "Failed to install c-ares"
+
+info "Installing icu4c..."
+test -d $cellar/icu4c || brew install icu4c &> /dev/null
+test -d $cellar/icu4c && let ++valid || err "Failed to install icu4c"
+
+info "Installing libnghttp2..."
+test -d $cellar/libnghttp2 || brew install libnghttp2 &> /dev/null
+test -d $cellar/libnghttp2 && let ++valid || err "Failed to install libnghttp2"
+
+info "Installing m4..."
+test -d $cellar/m4 || brew install m4 &> /dev/null
+test -d $cellar/m4 && let ++valid || err "Failed to install m4"
+
+info "Installing autoconf..."
+test -d $cellar/autoconf || brew install autoconf &> /dev/null
+test -d $cellar/autoconf && let ++valid || err "Failed to install autoconf"
+
+info "Installing automake..."
+test -d $cellar/automake || brew install automake &> /dev/null
+test -d $cellar/automake && let ++valid || err "Failed to install automake"
+
+info "Installing libtool..."
+test -d $cellar/libtool || brew install libtool &> /dev/null
+test -d $cellar/libtool && let ++valid || err "Failed to install libtool"
+
+info "Installing docutils..."
+test -d $cellar/docutils || brew install docutils &> /dev/null
+test -d $cellar/docutils && let ++valid || err "Failed to install docutils"
+
+info "Installing python@3.10..."
+test -d $cellar/python@3.10 || brew install python@3.10 &> /dev/null
+test -d $cellar/python@3.10 && let ++valid || err "Failed to install python@3.10"
+
+info "Installing pygments..."
+test -d $cellar/pygments || brew install pygments &> /dev/null
+test -d $cellar/pygments && let ++valid || err "Failed to install pygments"
+
+info "Installing sphinx-doc..."
+test -d $cellar/sphinx-doc || brew install sphinx-doc &> /dev/null
+test -d $cellar/sphinx-doc && let ++valid || err "Failed to install sphinx-doc"
+
+info "Installing libuv..."
+test -d $cellar/libuv || brew install libuv &> /dev/null
+test -d $cellar/libuv && let ++valid || err "Failed to install libuv"
+
+info "Installing node..."
+test -d $cellar/node || brew install node &> /dev/null
+test -d $cellar/node && let ++valid || err "Failed to install node"
+
 # Performing cleanup commands
 brew update &> /dev/null
-brew upgrade &> /dev/null
 brew cleanup &> /dev/null
 
 # Printing end message
