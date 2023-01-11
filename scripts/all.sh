@@ -2,8 +2,8 @@
 # $1 = REPO_PATH, $2 = CRATE_PATH, $3 = FUNCTION_PATH, $4 = SCRIPT_PATH
 
 # Exporting variables
-export CARGO_HOME=$HOME/.config/cargo
-export RUSTUP_HOME=$HOME/.config/rustup
+export CARGO_HOME=$HOME/.cache/cargo
+export RUSTUP_HOME=$HOME/.cache/rustup
 
 # Defining utility variables
 _SIZE_="40"

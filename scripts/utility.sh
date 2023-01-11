@@ -74,14 +74,14 @@ grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure pytho
 # Configuring rust installation
 info "Configuring rust..."
 read -r -d '' zshrc_content << EOM
-export CARGO_HOME=\$HOME/.config/cargo
-export RUSTUP_HOME=\$HOME/.config/rustup
+export CARGO_HOME=\$HOME/.cache/cargo
+export RUSTUP_HOME=\$HOME/.cache/rustup
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
 rustc -V &> /dev/null || rustup-init -y &> /dev/null
 grep -q "$zshrc_content" $zshrc && rustc -V &> /dev/null && let ++valid \
-|| err "Failed to install rust"
+|| err "Failed to configure rust"
 
 # Configuring less history
 info "Configuring less..."
@@ -95,17 +95,17 @@ grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure less"
 # Configuring sdkman installation
 info "Configuring sdkman..."
 read -r -d '' zshrc_content << EOM
-export SDKMAN_DIR="/Users/Najmoon/.config/sdkman"
-[[ -s "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh" ]] \\\\
-&& source "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="/Users/Najmoon/.cache/sdkman"
+[[ -s "/Users/Najmoon/.cache/sdkman/bin/sdkman-init.sh" ]] \\\\
+&& source "/Users/Najmoon/.cache/sdkman/bin/sdkman-init.sh"
 EOM
 
 grep -Fq "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
-export SDKMAN_DIR=$HOME/.config/sdkman
+export SDKMAN_DIR=$HOME/.cache/sdkman
 sdk version &> /dev/null || curl -s "https://get.sdkman.io?rcupdate=false" | zsh &> /dev/null
 
-[[ -s "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh" ]] \
-&& source "/Users/Najmoon/.config/sdkman/bin/sdkman-init.sh"
+[[ -s "/Users/Najmoon/.cache/sdkman/bin/sdkman-init.sh" ]] \
+&& source "/Users/Najmoon/.cache/sdkman/bin/sdkman-init.sh"
 grep -Fq "$zshrc_content" $zshrc && sdk version &> /dev/null && let ++valid \
 || err "Failed to install sdkman"
 sdk update &> /dev/null
@@ -131,6 +131,41 @@ grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
 grep -q "$vimrc_content" $vimrc || echo "$vimrc_content" >> $vimrc
 grep -q "$zshrc_content" $zshrc && grep -q "$vimrc_content" $vimrc && let ++valid \
 || err "Failed to configure vim"
+
+# Configuring npm settings
+info "Configuring npm..."
+npm_cache=$HOME/.config/npm
+npm_config=$HOME/.config/npm/.npmrc
+
+[[ $(npm config get cache) == $npm_cache ]] || npm config set cache $npm_cache --global
+[[ $(npm config get userconfig) == $npm_config ]] || npm config set userconfig $npm_config --global
+[ -d $HOME/.config/npm/_logs ] && let ++valid || err "Failed to configure npm"
+
+# Configuring node settings
+info "Configuring node..."
+read -r -d '' zshrc_content << EOM
+export NODE_REPL_HISTORY=\$HOME/.config/node/.node_repl_history
+EOM
+
+node_repl_history=$HOME/.config/node/.node_repl_history
+[ -e $node_repl_history ] || (mkdir -p $HOME/.config/node && touch $node_repl_history)
+grep -q "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure node"
+
+# Configuring http-server
+info "Configuring http-server..."
+http-server -v &> /dev/null || npm install -g http-server &> /dev/null
+http-server -v &> /dev/null && let ++valid || err "Failed to install http-server"
+
+# # Configuring opam
+# info "Configuring opam..."
+# read -r -d '' zshrc_content << EOM
+# [[ ! -r /Users/Najmoon/.cache/opam/opam-init/init.zsh ]] \\\\
+# || source /Users/Najmoon/.cache/opam/opam-init/init.zsh &> /dev/null
+# EOM
+
+# grep -Fq "$zshrc_content" $zshrc || echo "$zshrc_content" >> $zshrc
+
 
 # Printing utility count
 expr $count % $_MAX_ &> /dev/null && printf "\n    "

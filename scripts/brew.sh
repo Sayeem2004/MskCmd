@@ -193,6 +193,19 @@ info "Installing node..."
 test -d $cellar/node || brew install node &> /dev/null
 test -d $cellar/node && let ++valid || err "Failed to install node"
 
+# # Installing ocaml
+# info "Installing gpatch..."
+# test -d $cellar/gpatch || brew install gpatch &> /dev/null
+# test -d $cellar/gpatch && let ++valid || err "Failed to install gpatch"
+
+# info "Installing ocaml..."
+# test -d $cellar/ocaml || brew install ocaml &> /dev/null
+# test -d $cellar/ocaml && let ++valid || err "Failed to install ocaml"
+
+# info "Installing opam..."
+# test -d $cellar/opam || brew install opam &> /dev/null
+# test -d $cellar/opam && let ++valid || err "Failed to install opam"
+
 # Performing cleanup commands
 brew update &> /dev/null
 brew cleanup &> /dev/null
