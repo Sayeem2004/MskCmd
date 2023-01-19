@@ -187,7 +187,7 @@ ruby -v | grep -q "ruby 3.2.0" || ruby-install ruby 3.2.0 -r $HOME/.cache/rubies
 grep -q "$zshrc_content" $zshrc && ruby -v | grep -q "ruby 3.2.0" && let ++valid \
 || err "Failed to configure ruby"
 
-# Configuring gems
+# Configuring jekyll
 info "Configuring jekyll..."
 jekyll -v &> /dev/null || gem install jekyll &> /dev/null
 jekyll -v &> /dev/null && let ++valid || err "Failed to configure jekyll"

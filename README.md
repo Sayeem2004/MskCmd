@@ -210,8 +210,8 @@ To remove all functions go to the `$ZDOTDIR/.zshrc` file and remove the followin
 
 ```txt
 # Configuring functions
-`fpath=($ZDOTDIR/.zsh_functions $fpath)`
-`autoload -U $fpath[1]/*(.:t)`
+fpath=($ZDOTDIR/.zsh_functions $fpath)
+autoload -U $fpath[1]/*(.:t)
 ```
 
 To remove a specific function, go to the `$ZDOTDIR/.zsh_functions` directory and remove the corresponding file. The list of functions is provided below.
@@ -234,6 +234,10 @@ After installation, the final step is to close the terminal and open a new one. 
 
 ## Brew (Usage)
 
+`brew`: A package manager for MacOS. Used to install basically everything else in this project. Use `brew help` for more information. [`Top`](#usage) ![Brew Example](assets/brew/Brew.png)
+
+`gcc`: GNU Compiler Collection for C and C++. Use `gcc <file>` or `g++ <file>` to compile C and C++ respectively. [`Top`](#usage) ![GCC Example](assets/brew/GCC.png)
+
 `tldr [command]`: Displays the TLDR pages for terminal commands. TLDR pages are short yet informative descriptions of terminal commands that are easier to read than MAN pages. Use `tldr -l` to list all available commands. [`Top`](#usage) ![TLDR Example](assets/brew/TLDR.png)
 
 `tree`: Displays directories as trees which is useful for visualizing the directory structure. Use `tldr tree` for more information about flag combinations. [`Top`](#usage) ![Tree Example](assets/brew/Tree.png)
@@ -243,6 +247,22 @@ After installation, the final step is to close the terminal and open a new one. 
 `tabs`: Configures tabs to be 4 spaces wide. Note that the default for ZSH is 8, which is very large. Customization can be done using `tabs -n`, where `n` is the desired tab size. [`Top`](#usage) ![Tabs Example](assets/utility/Tabs.png)
 
 `bat`: This is a clone of the `cat` command with syntax highlighting. The syntax highlighting is done using the `Nord` theme. Different themes can be found using the `--list-themes` flag and chosen using the `-theme` flag. [`Top`](#usage) ![Bat Example](assets/utility/Bat.png)
+
+`python`: Provides a Python 3.11.1 environment for programming. Run a python file with `python [file]` [`Top`](#usage) ![Python Example](assets/utility/Python.png)
+
+`rust`: Provides a Rust 1.57.0 environment for programming. Run a rust file with `rustc [file]`. Create a rust project with `cargo init`. [`Top`](#usage) ![Rust Example](assets/utility/Rust.png)
+
+`sdk`: Package manager for Java and related technologies. Use `sdk help` for more information. [`Top`](#usage) ![SDK Example](assets/utility/SDK.png)
+
+`java`: Provides a Java 17.0.5 environment for programming. Run a java file with `javac [file]` and `java [file]`. [`Top`](#usage) ![Java Example](assets/utility/Java.png)
+
+`node`: Provides a Node 19.4.0 environment for programming. Run a file with `node [file]` or use `node` to start a prompt. [`Top`](#usage) ![Node Example](assets/utility/Node.png)
+
+`http-server`: Provides a web server for hosting static websites. Use `http-server -c-1 [path]` to start the server. [`Top`](#usage) ![HTTP Server Example](assets/utility/HTTP-Server.png)
+
+`ruby`: Provides a Ruby 3.2.0 environment for programming. Run a ruby file with `ruby [file]` or use `irb` to start a prompt. [`Top`](#usage) ![Ruby Example](assets/utility/Ruby.png)
+
+`jekyll`: Provides a Jekyll 4.3.1 environment for creating and hosting websites. Use `jekyll build` and `jekyll serve` to host the website. [`Top`](#usage) ![Jekyll Example](assets/utility/Jekyll.png)
 
 ## Function (Usage)
 
@@ -255,3 +275,7 @@ After installation, the final step is to close the terminal and open a new one. 
 `jpgcrush-all`: Compresses and overwrites all JPG images in the current directory. The resulting images are similar in quality to the original images but are smaller in size. [`Top`](#usage)![JPG Crush All Example](assets/function/JPGCrush-All.png)
 
 `intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression. This is useful for finding lines in a file that contain integers that are within a certain range. For example, `intsrc "x >= 0 && x <= 100" --file file.txt` will print all lines in `file.txt` that contain integers between 0 and 100 inclusive. `x` must be the variable that represents the integer in the expression. [`Top`](#usage) ![IntSrc Example](assets/function/IntSrc.png)
+
+`gview [path]`: Prints the contents of a file or directory in a graphical view. If no path is given, the current directory is used. If a file is used, it should follow the given format described by `gview help`. [`Top`](#usage) ![GView Example](assets/function/GView.png)
+
+`viewpath`: Prints the PATH environment variable in a readable format. [`Top`](#usage) ![ViewPath Example](assets/function/ViewPath.png)
