@@ -4,7 +4,7 @@ This is an installer for my personal ZSH configuration. It is specific to MacOS 
 
 # Installation
 
-`git clone git@github.com:Sayeem2004/ZSH.git; cd ZSH;` Clones and enters the repository.
+`git clone git@github.com:Sayeem2004/ZSH.git && cd ZSH` Clones and enters the repository.
 
 `make` Installs the project and all dependencies.
 

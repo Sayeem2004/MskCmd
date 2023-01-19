@@ -193,18 +193,22 @@ info "Installing node..."
 test -d $cellar/node || brew install node &> /dev/null
 test -d $cellar/node && let ++valid || err "Failed to install node"
 
-# # Installing ocaml
-# info "Installing gpatch..."
-# test -d $cellar/gpatch || brew install gpatch &> /dev/null
-# test -d $cellar/gpatch && let ++valid || err "Failed to install gpatch"
+# Installing ruby
+info "Installing bison..."
+test -d $cellar/bison || brew install bison &> /dev/null
+test -d $cellar/bison && let ++valid || err "Failed to install bison"
 
-# info "Installing ocaml..."
-# test -d $cellar/ocaml || brew install ocaml &> /dev/null
-# test -d $cellar/ocaml && let ++valid || err "Failed to install ocaml"
+info "Installing libffi..."
+test -d $cellar/libffi || brew install libffi &> /dev/null
+test -d $cellar/libffi && let ++valid || err "Failed to install libffi"
 
-# info "Installing opam..."
-# test -d $cellar/opam || brew install opam &> /dev/null
-# test -d $cellar/opam && let ++valid || err "Failed to install opam"
+info "Installing libyaml..."
+test -d $cellar/libyaml || brew install libyaml &> /dev/null
+test -d $cellar/libyaml && let ++valid || err "Failed to install libyaml"
+
+info "Installing ruby-install..."
+test -d $cellar/ruby-install || brew install ruby-install &> /dev/null
+test -d $cellar/ruby-install && let ++valid || err "Failed to install ruby-install"
 
 # Performing cleanup commands
 brew update &> /dev/null

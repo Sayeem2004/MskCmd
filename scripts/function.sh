@@ -49,6 +49,10 @@ info "Writing intsrc..." && $3/intsrc.sh $1
 info "Writing gview..." && $3/gview.sh $1
 [ -e $zsh_functions/gview ] && let ++valid || err "Failed to write gview"
 
+# Writing viewpath
+info "Writing viewpath..." && $3/viewpath.sh $1
+[ -e $zsh_functions/viewpath ] && let ++valid || err "Failed to write viewpath"
+
 # Printing end message
 expr $count % $_MAX_ &> /dev/null && printf "\n    "
 title "Wrote $valid Functions"
