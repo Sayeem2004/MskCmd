@@ -16,9 +16,7 @@ Installs `brew` if it is not already installed.
 
 Uses `brew` to install the following packages.
 
-```txt
-`bat`:                      Cat clone with syntax highlighting
-
+```md
 `gcc`:                      GNU compiler collection for C and C++
 |-- `gmp`:                  (Dependency)
 |-- `isl`:                  (Dependency)
@@ -35,6 +33,8 @@ Uses `brew` to install the following packages.
 
 `pngcrush`:                 Utility to optimize PNG files
 
+`tree`:                     Display directories as trees
+
 `python`:                   Python programming language
 |-- `gdbm`:                 (Dependency)
 |-- `mpdecimal`:            (Dependency)
@@ -45,20 +45,57 @@ Uses `brew` to install the following packages.
 |-- `sqlite`:               (Dependency)
 |-- `xz`:                   (Dependency)
 
+`bat`:                      Cat clone with syntax highlighting
+
 `tealdeer`:                 TLDR pages for terminal commands
 
-`tree`:                     Display directories as trees
+`rustup-init`:              Rust toolchain installer
+
+`node`:                     Platform to build network applications
+|-- `brotli`:               (Dependency)
+|-- |-- `cmake`:            (Dependency)
+|-- `c-ares`:               (Dependency)
+|-- `icu4c`:                (Dependency)
+|-- `libnghttp2`:           (Dependency)
+|-- |-- `pkg-config`:       (Dependency)
+|-- `libuv`:                (Dependency)
+|-- |-- `autoconf`:         (Dependency)
+|-- |-- `automake`:         (Dependency)
+|-- |-- `libtool`:          (Dependency)
+|-- |-- `sphinx-doc`:       (Dependency)
+|-- `openssl@1.1`:          (Dependency)
+|-- |-- `ca-certificates`:  (Dependency)
+
+`ruby-install`:             Ruby installer
+|-- `bison`:                (Dependency)
+|-- `libffi`:               (Dependency)
+|-- `libyaml`:              (Dependency)
+|-- `xz`:                   (Dependency)
 ```
 
-## Coding (Installation)
+## Utility (Installation)
 
-Configures the following utilities as described below. Some of these utilities are installed by `brew` while others are not.
+Configures the following utilities and files as described below. Some of these utilities are installed by `brew` while others are not.
 
 These configurations are loaded automatically when the shell is started through the `$ZDOTDIR/.zshrc` file.
 
-```txt
+```md
+`zshrc1`: Prepares the `$ZDOTDIR/.zshrc` file.
+`functions`: Prepares the `$ZDOTDIR/.zsh_functions` directory.
 `tabs`: Configures tabs to be 4 spaces wide.
 `bat`: Configures `bat` to use the `Nord` theme.
+`python`: Aliases `python` to `python3`.
+`rust`: Installs `rustup` and `cargo`.
+`less`: Removes the `less` history file.
+`sdkman`: Installs `sdkman`.
+`java`: Installs `java` using `sdkman`.
+`vim`: Edits locations of `vim` configuration files.
+`npm`: Configures `npm` variables.
+`node`: Installs `node` using `npm`.
+`http-server`: Installs `http-server` using `npm`.
+`ruby`: Installs `ruby` using `ruby-install`.
+`jekyll`: Installs `jekyll` using `gem`.
+`zshrc2`: Finishes the `$ZDOTDIR/.zshrc` file.
 ```
 
 ## Function (Installation)
@@ -67,12 +104,14 @@ Creates the `$ZDOTDIR/.zsh_functions` directory, adds it to the `fpath` variable
 
 These functions are loaded automatically when the shell is started through the `$ZDOTDIR/.zshrc` file.
 
-```txt
+```md
 `tally [path]`: Counts the number of lines in the given directory and sorts them by extension type.
 `sshload`: Loads in SSH identities from apple keychain.
 `pngcrush-all`: Compresses and overwrites all PNG images in the current directory.
 `jpgcrush-all`: Compresses and overwrites all JPG images in the current directory.
 `intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression.
+`gview [path]`: Prints the contents of a file or directory in a graphical view.
+`viewpath`: Prints the PATH environment variable in a readable format.
 ```
 
 # Removal
@@ -85,9 +124,7 @@ The full list of packages installed by `brew` is provided below. Use the followi
 
 `brew uninstall [package]` Uninstalls the specified package.
 
-```txt
-`bat`:                      Cat clone with syntax highlighting
-
+```md
 `gcc`:                      GNU compiler collection for C and C++
 |-- `gmp`:                  (Dependency)
 |-- `isl`:                  (Dependency)
@@ -104,6 +141,8 @@ The full list of packages installed by `brew` is provided below. Use the followi
 
 `pngcrush`:                 Utility to optimize PNG files
 
+`tree`:                     Display directories as trees
+
 `python`:                   Python programming language
 |-- `gdbm`:                 (Dependency)
 |-- `mpdecimal`:            (Dependency)
@@ -114,18 +153,55 @@ The full list of packages installed by `brew` is provided below. Use the followi
 |-- `sqlite`:               (Dependency)
 |-- `xz`:                   (Dependency)
 
+`bat`:                      Cat clone with syntax highlighting
+
 `tealdeer`:                 TLDR pages for terminal commands
 
-`tree`:                     Display directories as trees
+`rustup-init`:              Rust toolchain installer
+
+`node`:                     Platform to build network applications
+|-- `brotli`:               (Dependency)
+|-- |-- `cmake`:            (Dependency)
+|-- `c-ares`:               (Dependency)
+|-- `icu4c`:                (Dependency)
+|-- `libnghttp2`:           (Dependency)
+|-- |-- `pkg-config`:       (Dependency)
+|-- `libuv`:                (Dependency)
+|-- |-- `autoconf`:         (Dependency)
+|-- |-- `automake`:         (Dependency)
+|-- |-- `libtool`:          (Dependency)
+|-- |-- `sphinx-doc`:       (Dependency)
+|-- `openssl@1.1`:          (Dependency)
+|-- |-- `ca-certificates`:  (Dependency)
+
+`ruby-install`:             Ruby installer
+|-- `bison`:                (Dependency)
+|-- `libffi`:               (Dependency)
+|-- `libyaml`:              (Dependency)
+|-- `xz`:                   (Dependency)
 ```
 
 ## Utility (Removal)
 
 To remove a specific utility configuration, follow the instructions below.
 
-```txt
-`tabs`: Remove the `tabs -4` line from the `$ZDOTDIR/.zshrc` file.
-`bat`: Remove the `export BAT_THEME="Nord"` line from the `$ZDOTDIR/.zshrc` file.
+```md
+`zhsrc1`: Remove the lines directly adjacent to `# Start Of Sayeem2004's ZSH Customization`
+`functions`: Remove the lines directly adjacent to `# Configuring functions`
+`tabs`: Remove the lines directly adjacent to `# Configuring tabs`
+`bat`: Remove the lines directly adjacent to `# Configuring bat`
+`python`: Remove the lines directly adjacent to `# Configuring python`
+`rust`: Remove the lines directly adjacent to `# Configuring rust` and delete the `~/.cache/cargo` and `~/.cache/rustup` directory.
+`less`: Remove the lines directly adjacent to `# Configuring less`
+`sdkman`: Remove the lines directly adjacent to `# Configuring sdkman` and delete the `~/.cache/sdkman` directory.
+`java`: Run `sdk uninstall java` to remove the `java` package.
+`vim`: Remove the lines directly adjacent to `# Configuring vim`
+`npm`: No guide yet.
+`node`: Remove the lines directly adjacent to `# Configuring node`
+`http-server`: Run `npm uninstall http-server` to remove the `http-server` package.
+`ruby`: Remove the lines directly adjacent to `# Configuring ruby` and delete the `~/cache/rubies` directory.
+`jekyll`: Run `gem uninstall jekyll` to remove the `jekyll` package.
+`zshrc2`: Remove the lines directly adjacent to `# End Of Sayeem2004's ZSH Customization`
 ```
 
 ## Function (Removal)
@@ -133,18 +209,21 @@ To remove a specific utility configuration, follow the instructions below.
 To remove all functions go to the `$ZDOTDIR/.zshrc` file and remove the following lines. Then delete the `$ZDOTDIR/.zsh_functions` directory.
 
 ```txt
+# Configuring functions
 `fpath=($ZDOTDIR/.zsh_functions $fpath)`
 `autoload -U $fpath[1]/*(.:t)`
 ```
 
 To remove a specific function, go to the `$ZDOTDIR/.zsh_functions` directory and remove the corresponding file. The list of functions is provided below.
 
-```txt
+```md
 `tally [path]`: Counts the number of lines in the given directory and sorts them by extension type.
 `sshload`: Loads in SSH identities from apple keychain.
 `pngcrush-all`: Compresses and overwrites all PNG images in the current directory.
 `jpgcrush-all`: Compresses and overwrites all JPG images in the current directory.
 `intsrc <expression> <file>`: Prints the lines in a file that contain integers that satisfy the given expression.
+`gview [path]`: Prints the contents of a file or directory in a graphical view.
+`viewpath`: Prints the PATH environment variable in a readable format.
 ```
 
 # Usage

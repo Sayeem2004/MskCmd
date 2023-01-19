@@ -26,13 +26,13 @@ let count=0
 let valid=0
 
 # Configuring the zshrc file
-info "Configuring zshrc..."
+info "Configuring zshrc1..."
 read -r -d '' zshrc_content << EOM
 # Start Of Sayeem2004's ZSH Customization --------------------------------------
 EOM
 
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content\n" >> $zshrc
-grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure zshrc"
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure zshrc1"
 
 # Configuring functions path
 info "Configuring functions..."
@@ -193,10 +193,12 @@ jekyll -v &> /dev/null || gem install jekyll &> /dev/null
 jekyll -v &> /dev/null && let ++valid || err "Failed to configure jekyll"
 
 # Printing closing line
+info "Configuring zshrc2..."
 read -r -d '' zshrc_content << EOM
 # End Of Sayeem2004's ZSH Customization ----------------------------------------
 EOM
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content\n" >> $zshrc
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure zshrc2"
 
 # Printing utility count
 expr $count % $_MAX_ &> /dev/null && printf "\n    "
