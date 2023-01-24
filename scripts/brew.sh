@@ -210,6 +210,15 @@ info "Installing ruby-install..."
 test -d $cellar/ruby-install || brew install ruby-install &> /dev/null
 test -d $cellar/ruby-install && let ++valid || err "Failed to install ruby-install"
 
+# Installing ocaml
+info "Installing gpatch..."
+test -d $cellar/gpatch || brew install gpatch &> /dev/null
+test -d $cellar/gpatch && let ++valid || err "Failed to install gpatch"
+
+info "Installing opam..."
+test -d $cellar/opam || brew install opam &> /dev/null
+test -d $cellar/opam && let ++valid || err "Failed to install opam"
+
 # Performing cleanup commands
 brew update &> /dev/null
 brew cleanup &> /dev/null

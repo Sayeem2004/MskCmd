@@ -192,6 +192,19 @@ info "Configuring jekyll..."
 jekyll -v &> /dev/null || gem install jekyll &> /dev/null
 jekyll -v &> /dev/null && let ++valid || err "Failed to configure jekyll"
 
+# Configuring opam
+info "Configuring opam..."
+read -r -d '' zshrc_content << EOM
+export OPAMROOT=\$HOME/.cache/opam
+EOM
+export OPAMROOT=$HOME/.cache/opam
+
+opam list &> /dev/null || opam init --bare -a -y --dot-profile $zshrc &> /dev/null
+sed -i -- 's|# opam configuration|# Configuring opam|g' $zshrc &> /dev/null
+
+grep -q "$zshrc_content" $zshrc || echo "$zshrc_content\n" >> $zshrc
+opam list &> /dev/null && let ++valid || err "Failed to configure opam"
+
 # Printing closing line
 info "Configuring zshrc2..."
 read -r -d '' zshrc_content << EOM
