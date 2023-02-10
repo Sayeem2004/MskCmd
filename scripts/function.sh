@@ -53,6 +53,10 @@ info "Writing gview..." && $3/gview.sh $1
 info "Writing viewpath..." && $3/viewpath.sh $1
 [ -e $zsh_functions/viewpath ] && let ++valid || err "Failed to write viewpath"
 
+# Writing pdfcrush-all
+info "Writing pdfcrush-all..." && $3/pdfcrush-all.sh $1
+[ -e $zsh_functions/pdfcrush-all ] && let ++valid || err "Failed to write pdfcrush-all"
+
 # Printing end message
 expr $count % $_MAX_ &> /dev/null && printf "\n    "
 title "Wrote $valid Functions"

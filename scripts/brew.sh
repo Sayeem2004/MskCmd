@@ -219,6 +219,43 @@ info "Installing opam..."
 test -d $cellar/opam || brew install opam &> /dev/null
 test -d $cellar/opam && let ++valid || err "Failed to install opam"
 
+# Installing ghostscript
+info "Installing fontconfig..."
+test -d $cellar/fontconfig || brew install fontconfig &> /dev/null
+test -d $cellar/fontconfig && let ++valid || err "Failed to install fontconfig"
+
+info "Installing freetype..."
+test -d $cellar/freetype || brew install freetype &> /dev/null
+test -d $cellar/freetype && let ++valid || err "Failed to install freetype"
+
+info "Installing jbig2dec..."
+test -d $cellar/jbig2dec || brew install jbig2dec &> /dev/null
+test -d $cellar/jbig2dec && let ++valid || err "Failed to install jbig2dec"
+
+info "Installing libidn..."
+test -d $cellar/libidn || brew install libidn &> /dev/null
+test -d $cellar/libidn && let ++valid || err "Failed to install libidn"
+
+info "Installing libpng..."
+test -d $cellar/libpng || brew install libpng &> /dev/null
+test -d $cellar/libpng && let ++valid || err "Failed to install libpng"
+
+info "Installing libtiff..."
+test -d $cellar/libtiff || brew install libtiff &> /dev/null
+test -d $cellar/libtiff && let ++valid || err "Failed to install libtiff"
+
+info "Installing little-cms2..."
+test -d $cellar/little-cms2 || brew install little-cms2 &> /dev/null
+test -d $cellar/little-cms2 && let ++valid || err "Failed to install little-cms2"
+
+info "Installing openjpeg..."
+test -d $cellar/openjpeg || brew install openjpeg &> /dev/null
+test -d $cellar/openjpeg && let ++valid || err "Failed to install openjpeg"
+
+info "Installing ghostscript..."
+test -d $cellar/ghostscript || brew install ghostscript &> /dev/null
+test -d $cellar/ghostscript && let ++valid || err "Failed to install ghostscript"
+
 # Performing cleanup commands
 brew update &> /dev/null
 brew cleanup &> /dev/null

@@ -34,6 +34,16 @@ EOM
 grep -q "$zshrc_content" $zshrc || echo "$zshrc_content\n" >> $zshrc
 grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure zshrc1"
 
+# Configuring command prompt
+info "Configuring prompt..."
+read -r -d '' zshrc_content << EOM
+# Configuring prompt
+PROMPT='%F{cyan}%n%f %F{yellow}%1~%f %F{cyan}$%f '
+EOM
+
+grep -q "$zshrc_content" $zshrc || echo "$zshrc_content\n" >> $zshrc
+grep -q "$zshrc_content" $zshrc && let ++valid || err "Failed to configure prompt"
+
 # Configuring functions path
 info "Configuring functions..."
 read -r -d '' zshrc_content << EOM
@@ -195,6 +205,7 @@ jekyll -v &> /dev/null && let ++valid || err "Failed to configure jekyll"
 # Configuring opam
 info "Configuring opam..."
 read -r -d '' zshrc_content << EOM
+# Configuring opam
 export OPAMROOT=\$HOME/.cache/opam
 EOM
 export OPAMROOT=$HOME/.cache/opam
