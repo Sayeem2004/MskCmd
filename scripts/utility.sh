@@ -205,7 +205,6 @@ jekyll -v &> /dev/null && let ++valid || err "Failed to configure jekyll"
 # Configuring opam
 info "Configuring opam..."
 read -r -d '' zshrc_content << EOM
-# Configuring opam
 export OPAMROOT=\$HOME/.cache/opam
 EOM
 export OPAMROOT=$HOME/.cache/opam
